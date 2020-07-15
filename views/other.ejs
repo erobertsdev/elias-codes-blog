@@ -1,0 +1,49 @@
+<%- include("partials/header"); -%>
+
+<div class="title">
+    <h1>E<span class="period">.</span><span class="codes">C</span></h1>
+        <ul class="nav">
+            <a href="https://elias-codes.herokuapp.com/"><li>Coding</li></a>
+            <a href="https://elias-codes.herokuapp.com/it"><li>IT</li></a>
+            <a href="https://elias-codes.herokuapp.com/other"><li class="active">Other</li></a>
+            <% if (currentUser === 'Login') { %>
+                <a href="https://elias-codes.herokuapp.com/login"><li><i class="far fa-user"></i> <%=currentUser%></li></a>
+                <% } else { %>
+                    <li id="nav-name">Welcome, <%=currentUser%>!</li>
+                    <a href="https://elias-codes.herokuapp.com/logout"><li>Logout</li></a>
+                    <% } %>
+        </ul>
+</div>
+
+<div class="main">
+    <div class="column-post">
+        <div class="post">
+            <% if (posts.length === 0) { %>
+                <h3 class="post-title">No Posts Yet</h3>
+            <% } else { %>
+            <% for (let post of posts) { %>
+                <% if (post.category === 'other') { %>
+            <hr>
+            <div class="date">
+                <h3><%=post.date%></h3>
+            </div>
+            <div class="post-container">
+                <h3 class="post-title"><%=post.title%></h3>
+                <p class="post-p">
+                    <%-post.body%>
+                </p>
+                <div class="hashtags">
+                    <p class="likes"><i class="far fa-heart"></i><%=post.meta.favorites%></p>
+                    <p class="post-hashtags">
+                        <%=post.hashtags%>
+                    </p>
+                </div>
+            </div>
+            <% }; %>
+        <% }; %>
+        <% }; %>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer"); -%>
